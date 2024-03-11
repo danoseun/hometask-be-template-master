@@ -1,0 +1,260 @@
+{
+	"info": {
+		"_postman_id": "948dcbf6-17bf-47c0-81c5-b28b22c13f5b",
+		"name": "Deel Backend Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2851236",
+		"_collection_link": "https://www.postman.com/danoseun/workspace/oluwaseun-somefun-s-public-workspace/collection/2851236-948dcbf6-17bf-47c0-81c5-b28b22c13f5b?action=share&source=collection_link&creator=2851236"
+	},
+	"item": [
+		{
+			"name": "Get Active Contracts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "profile_id",
+						"value": "4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/contracts",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"contracts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Contract",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "profile_id",
+						"value": "4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}contracts/7",
+					"host": [
+						"{{BASE_URL}}contracts"
+					],
+					"path": [
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Unpaid Jobs",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "profile_id",
+						"value": "4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/jobs/unpaid",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"jobs",
+						"unpaid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pay for Job",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "profile_id",
+						"value": "4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/jobs/5/pay",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"jobs",
+						"5",
+						"pay"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "profile_id",
+						"value": "6",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": \"15\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/balances/deposit/2",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"balances",
+						"deposit",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Best Profession",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/admin/best-profession?start=\"2020-01-01T00:00:00.000Z\"&end=\"2020-08-15T23:59:00.000Z\"",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"admin",
+						"best-profession"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "\"2020-01-01T00:00:00.000Z\""
+						},
+						{
+							"key": "end",
+							"value": "\"2020-08-15T23:59:00.000Z\""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Best Clients",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/admin/best-clients?start=2022-08-01T23:11:26.737Z&end=2020-08-17T19:11:26.737Z&limit=5",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"admin",
+						"best-clients"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "2022-08-01T23:11:26.737Z"
+						},
+						{
+							"key": "end",
+							"value": "2020-08-17T19:11:26.737Z"
+						},
+						{
+							"key": "limit",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:3001",
+			"type": "string"
+		}
+	]
+}
