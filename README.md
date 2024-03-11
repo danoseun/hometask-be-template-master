@@ -102,7 +102,7 @@ Thank you and good luck! 🙏
 - After cloning the repo, you can run `./run.sh` or `sh run.sh` if you prefer to run with docker.
 
 ## Decisions made
-1. Added eslint to the project
+1. Added eslint and prettier to the project
 2. Separated the models into modules and congregated them into index.js file
 3. Added more error handlers and a central error handler
 4. Services and models did heavy lifting of the business logic making the controllers lean
