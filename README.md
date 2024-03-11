@@ -102,6 +102,16 @@ Thank you and good luck! 🙏
 - After cloning the repo, you can run `./run.sh` or `sh run.sh` if you prefer to run with docker.
 
 ## Decisions made
+1. Added eslint to the project
+2. Separated the models into modules and congregated them into index.js file
+3. Added more error handlers and a central error handler
+4. Services and models did heavy lifting of the business logic making the controllers lean
+5. Routes were separated
+6. Transactions and locking mechanisms were used where necessary to achieve atomicity and concurrency
+7. Tests were also written to verify that code works as expected.
+8. Project was dockerised and a start script was added to start the project for the docker option.
+
+
 ## Further Improvements to be considered
 
 1. Proper schema validation(e.g using Joi) to increase data consistency.
