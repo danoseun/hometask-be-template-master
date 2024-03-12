@@ -101,7 +101,7 @@ Thank you and good luck! 🙏
 
 - After cloning the repo, do the following,
     - in the root of the project run `chmod +x run.sh`(gives it executable permissions)
-    - `./run.sh` or `sh run.sh` if you prefer to run with docker.
+    - Then `./run.sh` or `sh run.sh`.
 
 ## Decisions made
 1. Added eslint and prettier to the project
