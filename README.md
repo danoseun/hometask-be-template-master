@@ -97,6 +97,14 @@ When you have finished the assignment, zip your repo (make sure to include .git 
 
 Thank you and good luck! 🙏
 
+_________________________________________________________________________________________________
+
+## To run locally
+- Use `npm run dev` to run in development mode.
+- To lint the entire project, use `npm run lint`.
+- Use `npm run test` to run both unit and integration tests.
+
+
 ## To run with docker
 
 - After cloning the repo, do the following,
