@@ -105,11 +105,11 @@ Thank you and good luck! 🙏
 
 ## Decisions made
 1. Added eslint and prettier to the project
-2. Separated the models into modules and congregated them into index.js file
+2. Separated the models into modules and congregated them into index.js file to improve code structure
 3. Added more error handlers and a central error handler.
 4. Services and models did the heavy lifting of the business logic making the controllers lean
 5. Routes were separated and brought together in an index file.
-6. Transactions and locking mechanisms were used where necessary to achieve atomicity and concurrency
+6. Transactions and locking mechanisms were used where necessary to achieve atomicity and limit concurrency
 7. Tests were also written to verify that code works as expected.
 8. Project was dockerised and a start script was added to start the project for the docker option.
 9. Docs can be found in the `/docs` directory in the root.
@@ -117,7 +117,7 @@ Thank you and good luck! 🙏
 
 ## Further Improvements to be considered
 
-1. Proper schema validation(e.g using Joi, express-validator or yup) to increase data consistency.
+1. Proper schema validation(e.g using Joi, express-validator or yup) to de-risk the app from accepting untrusted data and increase data consistency.
 2. Setting up proper logging and monitoring to add observability to the server.
 3. API versioning would also make sense. It helps in terms of backward compatibility, security and compliance et.c
 4. In production, it would be proper to use secure authentication practices using (JWT Auth) following OWASP principles, Authorization and RBAC(Role Based Access).
