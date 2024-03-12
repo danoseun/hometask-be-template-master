@@ -7,10 +7,10 @@ const getBestProfession = async (req, res) => {
   try {
     const { start, end } = req.query;
 
-    const since = new Date(Number(start));
+    const from = new Date(Number(start));
     const to = new Date(Number(end));
 
-    const { status, response } = await queryBestProfession(since, to);
+    const { status, response } = await queryBestProfession(from, to);
     res.status(status).json(response);
   } catch (error) {
     return {

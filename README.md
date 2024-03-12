@@ -99,25 +99,28 @@ Thank you and good luck! 🙏
 
 ## To run with docker
 
-- After cloning the repo, you can run `./run.sh` or `sh run.sh` if you prefer to run with docker.
+- After cloning the repo, do the following,
+    - in the root of the project run `chmod +x run.sh`(gives it executable permissions)
+    - `./run.sh` or `sh run.sh` if you prefer to run with docker.
 
 ## Decisions made
 1. Added eslint and prettier to the project
 2. Separated the models into modules and congregated them into index.js file
-3. Added more error handlers and a central error handler
-4. Services and models did heavy lifting of the business logic making the controllers lean
-5. Routes were separated
+3. Added more error handlers and a central error handler.
+4. Services and models did the heavy lifting of the business logic making the controllers lean
+5. Routes were separated and brought together in an index file.
 6. Transactions and locking mechanisms were used where necessary to achieve atomicity and concurrency
 7. Tests were also written to verify that code works as expected.
 8. Project was dockerised and a start script was added to start the project for the docker option.
+9. Docs can be found in the `/docs` directory in the root.
 
 
 ## Further Improvements to be considered
 
-1. Proper schema validation(e.g using Joi) to increase data consistency.
+1. Proper schema validation(e.g using Joi, express-validator or yup) to increase data consistency.
 2. Setting up proper logging and monitoring to add observability to the server.
 3. API versioning would also make sense. It helps in terms of backward compatibility, security and compliance et.c
-4. Secure authentication practices using like(JWT Auth) following OWASP principles, Authorzation and RBAC(Role Based Access).
+4. In production, it would be proper to use secure authentication practices using (JWT Auth) following OWASP principles, Authorization and RBAC(Role Based Access).
 5. In production, it will be advisable to use [migrations](https://sequelize.org/docs/v6/other-topics/migrations/) rather than force syncing.
 6. Add more tests to check for fuzzy or certain edge cases.
 7. In production, we would want to use environment variables to manage database connections and other secret and dynamic data.
