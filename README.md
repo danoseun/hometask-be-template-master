@@ -124,4 +124,4 @@ Thank you and good luck! 🙏
 5. In production, it will be advisable to use [migrations](https://sequelize.org/docs/v6/other-topics/migrations/) rather than force syncing.
 6. Add more tests to check for fuzzy or certain edge cases.
 7. In production, we would want to use environment variables to manage database connections and other secret and dynamic data.
-8. If the project keeps growing, we could migrate to a typed language like Typescript to catch bugs at compile time and take advantage of more OOP concepts.
+8. If the project keeps growing, we could consider migrating to a typed language like Typescript to catch bugs at compile time and take advantage of more OOP concepts.
