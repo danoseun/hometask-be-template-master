@@ -20,7 +20,7 @@ describe("Contract model", () => {
     let terminatedContract;
     let terminatedContractAttr;
 
-    describe("when there are all terminated", () => {
+    describe("when the contracts are all terminated", () => {
       beforeAll(async () => {
         clientAttr = generateProfile({ type: "client" });
         client = await Profile.create(clientAttr);

@@ -311,7 +311,7 @@ describe("Job model", () => {
         });
       });
 
-      it("should paid set tu true", async () => {
+      it("should set paid to true", async () => {
         expect(unpaidJob.paid).toEqual(true);
       });
 

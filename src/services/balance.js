@@ -10,7 +10,7 @@ const {
 } = require("../errors/balance");
 const { isNumeric } = require("../util/isNumeric");
 
-const makeDeposit = async (profile, toId, amount) => {
+const makeDeposit = async (profile, receiverId, amount) => {
   const t = await sequelize.transaction();
   try {
     const transactionOption = { transaction: t, lock: t.LOCK.UPDATE };
@@ -25,10 +25,10 @@ const makeDeposit = async (profile, toId, amount) => {
           "Amount is bigger than debt ratio"
         );
     }
-    if (profile.id === toId)
+    if (profile.id === receiverId)
       throw new SelfDepositError("Cannot deposit to yourself");
 
-    await executeTransfer(profile.id, toId, amount, transactionOption);
+    await executeTransfer(profile.id, receiverId, amount, transactionOption);
     await t.commit();
 
     const result = await profile.reload();

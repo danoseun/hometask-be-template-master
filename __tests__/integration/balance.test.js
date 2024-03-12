@@ -2,7 +2,6 @@ const { Job, Contract, Profile } = require("../../src/db");
 const { generateJob } = require("../factory/job");
 const { generateProfile } = require("../factory/profile");
 const { generateContract } = require("../factory/contract");
-const { makePayment } = require("../../src/services/job");
 const { makeDeposit } = require("../../src/services/balance");
 
 describe("balance service", () => {
@@ -62,7 +61,7 @@ describe("balance service", () => {
 
   describe("make deposit", () => {
     describe("when profile have not debt", () => {
-      it("return error", async () => {
+      it("should return an error when amount exceeds deposit threshold", async () => {
         const { response } = await makeDeposit(
           clientWithoutDebt,
           firstContractor.id,
@@ -74,7 +73,7 @@ describe("balance service", () => {
     });
 
     describe("when deposit more than debt ratio", () => {
-      it("return error", async () => {
+      it("should return an error when amount exceeds deposit threshold", async () => {
         const { response } = await makeDeposit(
           clientWithDebt,
           firstContractor.id,
@@ -85,8 +84,43 @@ describe("balance service", () => {
       });
     });
 
+    describe("when amount to be deposited is empty or null", () => {
+      it("should return an error when amount to be deposited is not valid input", async () => {
+        const { status, response } = await makeDeposit(
+          clientWithDebt,
+          firstContractor.id,
+          'qwer'
+        );
+
+        expect(status).toBe(400)
+        expect(response.error).toEqual("Please specify a valid amount for this input");
+      });
+
+      it("should return an error when amount to be deposited is another invalid input", async () => {
+        const { status, response } = await makeDeposit(
+          clientWithDebt,
+          firstContractor.id,
+          '20a'
+        );
+        
+        expect(status).toBe(400)
+        expect(response.error).toEqual("Please specify a valid amount for this input");
+      });
+
+      it("should return an error when amount to be deposited is empty", async () => {
+        const { status, response } = await makeDeposit(
+          clientWithDebt,
+          firstContractor.id,
+          ''
+        );
+
+        expect(status).toBe(400);
+        expect(response.error).toBe("Please specify a valid amount for this input");
+      });
+    });
+
     describe("when profile have not enough funds", () => {
-      it("return error", async () => {
+      it("should return error an error when funds are insufficient", async () => {
         const { response } = await makeDeposit(
           firstContractor,
           secondContractor.id,
@@ -96,7 +130,7 @@ describe("balance service", () => {
         expect(response.error).toBe("Insufficient funds");
       });
 
-      it("from balance not changed", async () => {
+      it("should ascertain that the balance did not change", async () => {
         const { response } = await makeDeposit(
           firstContractor,
           secondContractor.id,
@@ -108,7 +142,7 @@ describe("balance service", () => {
         expect(client.balance).toBe(firstContractor.balance);
       });
 
-      it("to balance not changed", async () => {
+      it("should ascertain that the to balance did not change", async () => {
         const { response } = await makeDeposit(
           firstContractor,
           secondContractor.id,
@@ -123,7 +157,7 @@ describe("balance service", () => {
 
     describe("when client deposit is succesfull", () => {
       const depositAmount = 10;
-      it("return status", async () => {
+      it("it should return status as 201 when there's a succesful deposit", async () => {
         const { status } = await makeDeposit(
           clientWithDebt,
           secondContractor.id,
@@ -133,7 +167,7 @@ describe("balance service", () => {
         expect(status).toBe(201);
       });
 
-      it("from balance changed", async () => {
+      it("should ascertain the from balance changed", async () => {
         const balanceBefore = (await Profile.findByPk(clientWithDebt.id))
           .balance;
         const { response } = await makeDeposit(
@@ -147,7 +181,7 @@ describe("balance service", () => {
         expect(client.balance).toBe(balanceBefore - depositAmount);
       });
 
-      it("to balance changed", async () => {
+      it("should ascertain that the to balance changed", async () => {
         const balanceBefore = (await Profile.findByPk(secondContractor.id))
           .balance;
         const { response } = await makeDeposit(

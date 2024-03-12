@@ -57,7 +57,7 @@ describe("job service", () => {
 
   describe("make payment", () => {
     describe("when profile is not client", () => {
-      it("return error", async () => {
+      it("return an error when client is trying to make payment for a job not theirs", async () => {
         const { response } = await makePayment(aJobToPay.id, firstContractor);
 
         expect(response.error).toBe("Profile is not client");
@@ -65,7 +65,7 @@ describe("job service", () => {
     });
 
     describe("when profile is not client of the job", () => {
-      it("return error", async () => {
+      it("should return an error when client is trying to pay for ajob not theirs", async () => {
         const { response } = await makePayment(
           aJobToPay.id,
           clientWithoutFunds
@@ -76,7 +76,7 @@ describe("job service", () => {
     });
 
     describe("when job is paid", () => {
-      it("return error", async () => {
+      it("should return an error when job is already paid for", async () => {
         const { response } = await makePayment(aPaidJob.id, clientWithFunds);
 
         expect(response.error).toBe("Job already paid");
@@ -84,7 +84,7 @@ describe("job service", () => {
     });
 
     describe("when client have not enough funds", () => {
-      it("return error", async () => {
+      it("should return an error for insufficient funds", async () => {
         const { response } = await makePayment(
           aJobInDebt.id,
           clientWithoutFunds
@@ -93,7 +93,7 @@ describe("job service", () => {
         expect(response.error).toBe("Insufficient funds");
       });
 
-      it("client balance not changed", async () => {
+      it("should ascertain that client balance not changed", async () => {
         await makePayment(aJobInDebt.id, clientWithoutFunds);
 
         const client = await Profile.findByPk(clientWithoutFunds.id);
@@ -101,7 +101,7 @@ describe("job service", () => {
         expect(client.balance).toBe(clientWithoutFunds.balance);
       });
 
-      it("contractor balance not changed", async () => {
+      it("should ascertain that contractor balance not changed", async () => {
         await makePayment(aJobInDebt.id, clientWithoutFunds);
 
         const contractor = await Profile.findByPk(secondContractor.id);
@@ -109,7 +109,7 @@ describe("job service", () => {
         expect(contractor.balance).toBe(secondContractor.balance);
       });
 
-      it("job not paid", async () => {
+      it("should return false when job is not paid", async () => {
         await makePayment(aJobInDebt.id, clientWithoutFunds);
 
         const job = await Job.findByPk(aJobInDebt.id);
@@ -125,26 +125,24 @@ describe("job service", () => {
         );
       });
 
-      it("return job", async () => {
+      it("should a status of 201 when successful payment is made for a job", async () => {
         const { status } = await makePayment(aJobToPay.id, clientWithFunds);
 
         expect(status).toEqual(201);
       });
 
-      it("client balance changed", async () => {
+      it("should ascertain that client balance changed", async () => {
         const balanceBefore = (await Profile.findByPk(clientWithFunds.id))
           .balance;
 
         const response = await makePayment(aJobToPay.id, clientWithFunds);
-
-        console.log(response);
 
         const client = await Profile.findByPk(clientWithFunds.id);
 
         expect(client.balance).toBe(balanceBefore - aJobToPay.price);
       });
 
-      it("contractor balance changed", async () => {
+      it("should ascertain that contractor balance changed", async () => {
         const balanceBefore = (await Profile.findByPk(firstContractor.id))
           .balance;
 
@@ -155,7 +153,7 @@ describe("job service", () => {
         expect(contractor.balance).toBe(balanceBefore + aJobToPay.price);
       });
 
-      it("job paid", async () => {
+      it("should return boolean when job is paid", async () => {
         await makePayment(aJobToPay.id, clientWithFunds);
 
         const job = await Job.findByPk(aJobToPay.id);

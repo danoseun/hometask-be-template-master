@@ -3,6 +3,10 @@ const { InsufficientFundsError } = require("../errors/job");
 
 const { ProfileNotFoundError } = require("../errors/profile");
 
+const { NullAmountError } = require("../errors/balance");
+
+const { isNumeric } = require("../util/isNumeric");
+
 const queryBestProfession = async (from, to) => {
   try {
     const queryResult = await Profile.getBestProfession(from, to);
@@ -47,9 +51,18 @@ const queryBestClients = async (from, to, limit = 2) => {
   }
 };
 
-const executeTransfer = async (fromId, toId, amount, transactionOption) => {
+const executeTransfer = async (
+  fromId,
+  receiverId,
+  amount,
+  transactionOption
+) => {
   const from = await Profile.getById(fromId, transactionOption);
-  const to = await Profile.getById(toId, transactionOption);
+  const to = await Profile.getById(receiverId, transactionOption);
+
+  if (!amount || !isNumeric(amount)) {
+    throw new NullAmountError("Please specify a valid amount for this input");
+  }
 
   if (!from || !to) {
     throw new ProfileNotFoundError("Profile not found");
