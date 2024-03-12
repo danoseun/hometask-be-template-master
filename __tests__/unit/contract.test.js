@@ -1,5 +1,4 @@
 const { Job, Contract, Profile } = require("../../src/db");
-const { generateJob } = require("../factory/job");
 const { generateProfile } = require("../factory/profile");
 const { generateContract } = require("../factory/contract");
 const { ContractStatus } = require("../../src/constants/contract");
